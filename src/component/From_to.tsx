@@ -5,9 +5,12 @@ import Exchange_button from "./Exchange_button";
 
 const From_to = () => {
   const [displayFlag, setDisplayFlag] = useState("");
-  const [displaySecondFlag, SetdisplaySecondFlag] = useState("");
-  const [amountChange, setAmountChange] = useState<number>();
+  const [displaySecondFlag, setDisplaySecondFlag] = useState("");
+  const [amountChange, setAmountChange] = useState<number>(0);
   const [initialValue, setInitialValue] = useState<number>(0);
+  const [convertedValue, setConvertedValue] = useState<number>(0);
+  const [initialCurrency, setInitialCurrency] = useState('');
+  const [convertedCurrency, setConvertedCurrency] = useState('');
 
   let currencies = [
     { countryName: "USD", flagTitle: "US", title: "US", toCountryName: "USD" },
@@ -27,18 +30,24 @@ const From_to = () => {
 
   useEffect(() => {
     setDisplayFlag(currencies[0].flagTitle);
-    SetdisplaySecondFlag(currencies[0].flagTitle);
+    setDisplaySecondFlag(currencies[0].flagTitle);
+    setInitialCurrency(currencies[0].countryName);
+    setConvertedCurrency(currencies[0].countryName);
+  
   }, []);
 
-  const handleChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setDisplayFlag(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedIndex: number = parseInt(e.target.value);
+    const selectedOption = currencies[selectedIndex];
+    setDisplayFlag(selectedOption.flagTitle);
+    setInitialCurrency(selectedOption.countryName);
   };
-  const handleSecondChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    SetdisplaySecondFlag(e.target.value);
+
+  const handleSecondChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedIndex: number = parseInt(e.target.value);
+    const selectedOption = currencies[selectedIndex];
+    setDisplaySecondFlag(selectedOption.flagTitle);
+    setConvertedCurrency(selectedOption.countryName);
   };
 
   const handleAmountChange = (e: { target: { value: string; }; }) => {
@@ -47,13 +56,14 @@ const From_to = () => {
     setAmountChange(newValue);
     setInitialValue(newValue);
 };
-  
 
   const [exchangeRate, setExchangeRate] = useState(0)
-
   const handleExchangeRate = () => {
-
+    let result = amountChange / 1500
+    setConvertedValue(result)
   }
+  
+
 
   return (
     <>
@@ -74,11 +84,10 @@ const From_to = () => {
             />
             <select
               className="select-from"
-              value={displayFlag}
               onChange={handleChange}
             >
-              {currencies.map((currency) => (
-                <option key={currency.countryName} value={currency.flagTitle}>
+              {currencies.map((currency, index) => (
+                <option key={currency.countryName} value={index}>
                   {" "}
                   {currency.countryName}
                 </option>
@@ -104,11 +113,10 @@ const From_to = () => {
             />
             <select
               className="select-from"
-              value={displaySecondFlag}
               onChange={handleSecondChange}
             >
-              {currencies.map((currency) => (
-                <option key={currency.toCountryName} value={currency.flagTitle}>
+              {currencies.map((currency, index) => (
+                <option key={currency.toCountryName} value={index}>
                   {" "}
                   {currency.toCountryName}
                 </option>
@@ -119,9 +127,9 @@ const From_to = () => {
       </div>
       <div></div>
       <div className="div-converter">
-        <span>{initialValue} USD</span>
-        <span>=</span>
-        <span>1000 NGN</span>
+        <span>{initialValue} {initialCurrency}</span>
+        <span> = </span>
+        <span>{convertedValue} {convertedCurrency}</span>
       </div>
       <Exchange_button onClick = {handleExchangeRate} />
     </>
