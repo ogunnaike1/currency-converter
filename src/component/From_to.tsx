@@ -7,7 +7,7 @@ const From_to = () => {
   const [displayFlag, setDisplayFlag] = useState("");
   const [displaySecondFlag, SetdisplaySecondFlag] = useState("");
   const [amountChange, setAmountChange] = useState<number>();
-  const [initialValue, setInitialValue] = useState<number>();
+  const [initialValue, setInitialValue] = useState<number>(0);
 
   let currencies = [
     { countryName: "USD", flagTitle: "US", title: "US", toCountryName: "USD" },
@@ -42,13 +42,12 @@ const From_to = () => {
   };
 
   const handleAmountChange = (e: { target: { value: string; }; }) => {
-    const newValue: number = parseFloat(e.target.value);
+    const input = e.target.value;
+    const newValue: number = input.trim() === '' ? 0 : parseFloat(input);
     setAmountChange(newValue);
     setInitialValue(newValue);
-   
-  };
+};
   
-
 
   const [exchangeRate, setExchangeRate] = useState(0)
 
