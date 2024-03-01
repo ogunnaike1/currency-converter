@@ -9,22 +9,17 @@ const From_to = () => {
   const [amountChange, setAmountChange] = useState<number>(0);
   const [initialValue, setInitialValue] = useState<number>(0);
   const [convertedValue, setConvertedValue] = useState<number>(0);
-  const [initialCurrency, setInitialCurrency] = useState('');
-  const [convertedCurrency, setConvertedCurrency] = useState('');
+  const [initialCurrency, setInitialCurrency] = useState("");
+  const [convertedCurrency, setConvertedCurrency] = useState("");
 
   let currencies = [
     { countryName: "USD", flagTitle: "US", title: "US", toCountryName: "USD" },
     { countryName: "EUR", flagTitle: "FR", title: "US", toCountryName: "EUR" },
-    { countryName: "JPY", flagTitle: "JP", title: "US", toCountryName: "JPY" },
     { countryName: "GBP", flagTitle: "GB", title: "US", toCountryName: "GBP" },
-    { countryName: "AUD", flagTitle: "AU", title: "US", toCountryName: "AUD" },
     { countryName: "CAD", flagTitle: "CA", title: "US", toCountryName: "CAD" },
-    { countryName: "CHF", flagTitle: "CH", title: "US", toCountryName: "CHF" },
-    { countryName: "CNH", flagTitle: "CN", title: "US", toCountryName: "CNH" },
-    { countryName: "HKD", flagTitle: "HK", title: "US", toCountryName: "HKD" },
-    { countryName: "NZD", flagTitle: "NZ", title: "US", toCountryName: "NZD" },
     { countryName: "NGN", flagTitle: "NG", title: "US", toCountryName: "NGN" },
   ];
+
   currencies.sort((a, b) => a.countryName.localeCompare(b.countryName));
   currencies.sort((a, b) => a.toCountryName.localeCompare(b.toCountryName));
 
@@ -33,7 +28,6 @@ const From_to = () => {
     setDisplaySecondFlag(currencies[0].flagTitle);
     setInitialCurrency(currencies[0].countryName);
     setConvertedCurrency(currencies[0].countryName);
-  
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,25 +44,81 @@ const From_to = () => {
     setConvertedCurrency(selectedOption.countryName);
   };
 
-  const handleAmountChange = (e: { target: { value: string; }; }) => {
+  const handleAmountChange = (e: { target: { value: string } }) => {
     const input = e.target.value;
-    const newValue: number = input.trim() === '' ? 0 : parseFloat(input);
+    const newValue: number = input.trim() === "" ? 0 : parseFloat(input);
     setAmountChange(newValue);
     setInitialValue(newValue);
-};
+  };
 
-  const [exchangeRate, setExchangeRate] = useState(0)
   const handleExchangeRate = () => {
-    let result = amountChange / 1500
-    setConvertedValue(result)
-  }
-  
-
+    displayFlag == "US" &&
+      displaySecondFlag == "NG" &&
+      setConvertedValue(amountChange * 1618);
+    displayFlag == "US" &&
+      displaySecondFlag == "GB" &&
+      setConvertedValue(amountChange / 1.27);
+    displayFlag == "US" &&
+      displaySecondFlag == "FR" &&
+      setConvertedValue(amountChange / 1.08);
+    displayFlag == "US" &&
+      displaySecondFlag == "CA" &&
+      setConvertedValue(amountChange / 1.36);
+    displayFlag == "NG" &&
+      displaySecondFlag == "US" &&
+      setConvertedValue(amountChange / 1618);
+    displayFlag == "NG" &&
+      displaySecondFlag == "GB" &&
+      setConvertedValue(amountChange / 2048);
+    displayFlag == "NG" &&
+      displaySecondFlag == "FR" &&
+      setConvertedValue(amountChange / 1754);
+    displayFlag == "NG" &&
+      displaySecondFlag == "CA" &&
+      setConvertedValue(amountChange / 1193);
+    displayFlag == "FR" &&
+      displaySecondFlag == "US" &&
+      setConvertedValue(amountChange * 1.08);
+    displayFlag == "FR" &&
+      displaySecondFlag == "GB" &&
+      setConvertedValue(amountChange / 1.17);
+    displayFlag == "FR" &&
+      displaySecondFlag == "NG" &&
+      setConvertedValue(amountChange * 2048);
+    displayFlag == "FR" &&
+      displaySecondFlag == "CA" &&
+      setConvertedValue(amountChange * 1.47);
+    displayFlag == "CA" &&
+      displaySecondFlag == "US" &&
+      setConvertedValue(amountChange / 1.36);
+    displayFlag == "CA" &&
+      displaySecondFlag == "GB" &&
+      setConvertedValue(amountChange / 1.72);
+    displayFlag == "CA" &&
+      displaySecondFlag == "NG" &&
+      setConvertedValue(amountChange * 1193);
+    displayFlag == "CA" &&
+      displaySecondFlag == "FR" &&
+      setConvertedValue(amountChange / 1.47);
+    displayFlag == "GB" &&
+      displaySecondFlag == "US" &&
+      setConvertedValue(amountChange * 1.27);
+    displayFlag == "GB" &&
+      displaySecondFlag == "CA" &&
+      setConvertedValue(amountChange * 1.72);
+    displayFlag == "GB" &&
+      displaySecondFlag == "NG" &&
+      setConvertedValue(amountChange * 2048);
+    displayFlag == "GB" &&
+      displaySecondFlag == "FR" &&
+      setConvertedValue(amountChange * 1.17);
+    displayFlag == displaySecondFlag && setConvertedValue(amountChange);
+  };
 
   return (
     <>
       <div className="div-enterAmount">Enter Amount</div>
-      <input type="number" onChange = {handleAmountChange}/>
+      <input type="number" onChange={handleAmountChange} />
       <div className="div-from_to">
         <div className="div-from">
           <span>From</span>
@@ -82,10 +132,7 @@ const From_to = () => {
               }}
               title="US"
             />
-            <select
-              className="select-from"
-              onChange={handleChange}
-            >
+            <select className="select-from" onChange={handleChange}>
               {currencies.map((currency, index) => (
                 <option key={currency.countryName} value={index}>
                   {" "}
@@ -111,10 +158,7 @@ const From_to = () => {
               }}
               title="US"
             />
-            <select
-              className="select-from"
-              onChange={handleSecondChange}
-            >
+            <select className="select-from" onChange={handleSecondChange}>
               {currencies.map((currency, index) => (
                 <option key={currency.toCountryName} value={index}>
                   {" "}
@@ -127,11 +171,15 @@ const From_to = () => {
       </div>
       <div></div>
       <div className="div-converter">
-        <span>{initialValue} {initialCurrency}</span>
+        <span>
+          {initialValue} {initialCurrency}
+        </span>
         <span> = </span>
-        <span>{convertedValue} {convertedCurrency}</span>
+        <span>
+          {convertedValue} {convertedCurrency}
+        </span>
       </div>
-      <Exchange_button onClick = {handleExchangeRate} />
+      <Exchange_button onClick={handleExchangeRate} />
     </>
   );
 };
