@@ -14,10 +14,10 @@ const From_to = () => {
 
   let currencies = [
     { countryName: "USD", flagTitle: "US", title: "US", toCountryName: "USD" },
-    { countryName: "EUR", flagTitle: "FR", title: "US", toCountryName: "EUR" },
-    { countryName: "GBP", flagTitle: "GB", title: "US", toCountryName: "GBP" },
-    { countryName: "CAD", flagTitle: "CA", title: "US", toCountryName: "CAD" },
-    { countryName: "NGN", flagTitle: "NG", title: "US", toCountryName: "NGN" },
+    { countryName: "EUR", flagTitle: "FR", title: "FR", toCountryName: "EUR" },
+    { countryName: "GBP", flagTitle: "GB", title: "GB", toCountryName: "GBP" },
+    { countryName: "CAD", flagTitle: "CA", title: "CA", toCountryName: "CAD" },
+    { countryName: "NGN", flagTitle: "NG", title: "NG", toCountryName: "NGN" },
   ];
 
   currencies.sort((a, b) => a.countryName.localeCompare(b.countryName));
