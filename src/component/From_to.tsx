@@ -4,8 +4,8 @@ import ReactCountryflagTitle, { ReactCountryFlag } from "react-country-flag";
 import Exchange_button from "./Exchange_button";
 
 const From_to = () => {
-  const [displayFlag, setDisplayFlag] = useState("");
-  const [displaySecondFlag, setDisplaySecondFlag] = useState("");
+  const [displayedFlag, setDisplayFlag] = useState("");
+  const [displayedSecondFlag, setDisplaySecondFlag] = useState("");
   const [amountChange, setAmountChange] = useState<number>(0);
   const [initialValue, setInitialValue] = useState<number>(0);
   const [convertedValue, setConvertedValue] = useState<number>(0);
@@ -52,32 +52,32 @@ const From_to = () => {
   };
 
   const handleExchangeRate = () => {
-    displayFlag == "US" &&
-      displaySecondFlag == "NG" &&
+    displayedFlag == "US" &&
+      displayedSecondFlag == "NG" &&
       setConvertedValue(amountChange * 1618);
-    displayFlag == "US" &&
-      displaySecondFlag == "GB" &&
+    displayedFlag == "US" &&
+      displayedSecondFlag == "GB" &&
       setConvertedValue(amountChange / 1.27);
-    displayFlag == "US" &&
-      displaySecondFlag == "FR" &&
+    displayedFlag == "US" &&
+      displayedSecondFlag == "FR" &&
       setConvertedValue(amountChange / 1.08);
-    displayFlag == "US" &&
-      displaySecondFlag == "CA" &&
+    displayedFlag == "US" &&
+      displayedSecondFlag == "CA" &&
       setConvertedValue(amountChange / 1.36);
-    displayFlag == "NG" &&
-      displaySecondFlag == "US" &&
+    displayedFlag == "NG" &&
+      displayedSecondFlag == "US" &&
       setConvertedValue(amountChange / 1618);
-    displayFlag == "NG" &&
-      displaySecondFlag == "GB" &&
+    displayedFlag == "NG" &&
+      displayedSecondFlag == "GB" &&
       setConvertedValue(amountChange / 2048);
-    displayFlag == "NG" &&
-      displaySecondFlag == "FR" &&
+    displayedFlag == "NG" &&
+      displayedSecondFlag == "FR" &&
       setConvertedValue(amountChange / 1754);
-    displayFlag == "NG" &&
-      displaySecondFlag == "CA" &&
+    displayedFlag == "NG" &&
+      displayedSecondFlag == "CA" &&
       setConvertedValue(amountChange / 1193);
-    displayFlag == "FR" &&
-      displaySecondFlag == "US" &&
+    displayedFlag == "FR" &&
+      displayedSecondFlag == "US" &&
       setConvertedValue(amountChange * 1.08);
     displayFlag == "FR" &&
       displaySecondFlag == "GB" &&
