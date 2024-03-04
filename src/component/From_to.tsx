@@ -5,7 +5,7 @@ import Exchange_button from "./Exchange_button";
 
 const From_to = () => {
   const [displayedFlag, setDisplayFlag] = useState("");
-  const [displayedSecondFlag, setDisplaySecondFlag] = useState("");
+  const [displayedSecondFlag, setdisplayedSecondFlag] = useState("");
   const [amountChange, setAmountChange] = useState<number>(0);
   const [initialValue, setInitialValue] = useState<number>(0);
   const [convertedValue, setConvertedValue] = useState<number>(0);
@@ -25,7 +25,7 @@ const From_to = () => {
 
   useEffect(() => {
     setDisplayFlag(currencies[0].flagTitle);
-    setDisplaySecondFlag(currencies[0].flagTitle);
+    setdisplayedSecondFlag(currencies[0].flagTitle);
     setInitialCurrency(currencies[0].countryName);
     setConvertedCurrency(currencies[0].countryName);
   }, []);
@@ -40,7 +40,7 @@ const From_to = () => {
   const handleSecondChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedIndex: number = parseInt(e.target.value);
     const selectedOption = currencies[selectedIndex];
-    setDisplaySecondFlag(selectedOption.flagTitle);
+    setdisplayedSecondFlag(selectedOption.flagTitle);
     setConvertedCurrency(selectedOption.countryName);
   };
 
@@ -79,40 +79,40 @@ const From_to = () => {
     displayedFlag == "FR" &&
       displayedSecondFlag == "US" &&
       setConvertedValue(amountChange * 1.08);
-    displayFlag == "FR" &&
-      displaySecondFlag == "GB" &&
+    displayedFlag == "FR" &&
+      displayedSecondFlag == "GB" &&
       setConvertedValue(amountChange / 1.17);
-    displayFlag == "FR" &&
-      displaySecondFlag == "NG" &&
+    displayedFlag == "FR" &&
+      displayedSecondFlag == "NG" &&
       setConvertedValue(amountChange * 2048);
-    displayFlag == "FR" &&
-      displaySecondFlag == "CA" &&
+    displayedFlag == "FR" &&
+      displayedSecondFlag == "CA" &&
       setConvertedValue(amountChange * 1.47);
-    displayFlag == "CA" &&
-      displaySecondFlag == "US" &&
+    displayedFlag == "CA" &&
+      displayedSecondFlag == "US" &&
       setConvertedValue(amountChange / 1.36);
-    displayFlag == "CA" &&
-      displaySecondFlag == "GB" &&
+    displayedFlag == "CA" &&
+      displayedSecondFlag == "GB" &&
       setConvertedValue(amountChange / 1.72);
-    displayFlag == "CA" &&
-      displaySecondFlag == "NG" &&
+    displayedFlag == "CA" &&
+      displayedSecondFlag == "NG" &&
       setConvertedValue(amountChange * 1193);
-    displayFlag == "CA" &&
-      displaySecondFlag == "FR" &&
+    displayedFlag == "CA" &&
+      displayedSecondFlag == "FR" &&
       setConvertedValue(amountChange / 1.47);
-    displayFlag == "GB" &&
-      displaySecondFlag == "US" &&
+    displayedFlag == "GB" &&
+      displayedSecondFlag == "US" &&
       setConvertedValue(amountChange * 1.27);
-    displayFlag == "GB" &&
-      displaySecondFlag == "CA" &&
+    displayedFlag == "GB" &&
+      displayedSecondFlag == "CA" &&
       setConvertedValue(amountChange * 1.72);
-    displayFlag == "GB" &&
-      displaySecondFlag == "NG" &&
+    displayedFlag == "GB" &&
+      displayedSecondFlag == "NG" &&
       setConvertedValue(amountChange * 2048);
-    displayFlag == "GB" &&
-      displaySecondFlag == "FR" &&
+    displayedFlag == "GB" &&
+      displayedSecondFlag == "FR" &&
       setConvertedValue(amountChange * 1.17);
-    displayFlag == displaySecondFlag && setConvertedValue(amountChange);
+    displayedFlag == displayedSecondFlag && setConvertedValue(amountChange);
   };
 
   return (
@@ -150,7 +150,7 @@ const From_to = () => {
           <span>To</span>
           <div className="div-image-container">
             <ReactCountryFlag
-              countryCode={displaySecondFlag}
+              countryCode={displayedSecondFlag}
               svg
               style={{
                 width: "2em",
